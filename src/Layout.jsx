@@ -1,4 +1,4 @@
-import { Outlet, RouterProvider } from "react-router";
+import { RouterProvider } from "react-router";
 import router from "./router";
 
 import { Menu } from "antd";
@@ -7,11 +7,38 @@ import { useState } from "react";
 
 const items = [
   { key: "deepseek-chat", icon: <PieChartOutlined />, label: "DeepSeek Chat" },
-  { key: "scene-arrange", icon: <DesktopOutlined />, label: "Scene Arrange" },
+  {
+    key: "deepseek-function-calling",
+    icon: <DesktopOutlined />,
+    label: "DeepSeek Function Calling",
+  },
+  {
+    key: "scene-arrange",
+    icon: <DesktopOutlined />,
+    label: "Scene Arrange",
+    children: [
+      {
+        key: "scene-arrange/meta-functions",
+        icon: <DesktopOutlined />,
+        label: "Meta Functions",
+      },
+      {
+        key: "scene-arrange/meta-scenes",
+        icon: <DesktopOutlined />,
+        label: "Meta Scenes",
+      },
+
+      // {
+      //   key: "scene-arrange-multi-chain-function-call",
+      //   icon: <DesktopOutlined />,
+      //   label: "Scene Arrange Multi Chain Function Call",
+      // },
+    ],
+  },
 ];
 
 function Left() {
-  const [current, setCurrent] = useState("scene-arrange");
+  const [current, setCurrent] = useState("scene-arrange/meta-functions");
 
   const onMenuClick = (e) => {
     const { key } = e;
@@ -23,6 +50,7 @@ function Left() {
     <div className="w-64 h-full">
       <Menu
         className="h-full"
+        defaultOpenKeys={["scene-arrange"]}
         defaultSelectedKeys={[current]}
         mode="inline"
         theme="light"

@@ -1,7 +1,9 @@
 import { createHashRouter } from "react-router";
 
-import DeepSeekChat from "@/pages/DeepSeekChat/index";
-import SceneArrange from "@/pages/SceneArrange/index";
+import DeepSeekChat from "@/views/DeepSeekChat/index";
+import DeepSeekFC from "@/views/DeepSeekFC/index";
+import SceneArrangeMetaScenes from "@/views/SceneArrange/MetaScenes/index";
+import SceneArrangeMetaFunctions from "@/views/SceneArrange/MetaFunctions/index";
 
 const router = createHashRouter([
   {
@@ -9,8 +11,21 @@ const router = createHashRouter([
     Component: DeepSeekChat,
   },
   {
+    path: "/deepseek-function-calling",
+    Component: DeepSeekFC,
+  },
+  {
     path: "/scene-arrange",
-    Component: SceneArrange,
+    children: [
+      {
+        path: "/scene-arrange/meta-functions",
+        Component: SceneArrangeMetaFunctions,
+      },
+      {
+        path: "/scene-arrange/meta-scenes",
+        Component: SceneArrangeMetaScenes,
+      },
+    ],
   },
 ]);
 
